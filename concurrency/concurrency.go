@@ -12,3 +12,22 @@ func F(n int) {
 		time.Sleep(time.Millisecond * time.Duration(rand.Intn(250)))
 	}
 }
+
+func Pinger(c chan<- string) {
+	for i := 0; ; i++ {
+		c <- "ping " + fmt.Sprintf("%d", i)
+	}
+}
+
+func Ponger(c chan<- string) {
+	for i := 0; ; i++ {
+		c <- "pong " + fmt.Sprintf("%d", i)
+	}
+}
+
+func Printer(c <-chan string) {
+	for {
+		fmt.Println(<-c)
+		time.Sleep(time.Second * 1)
+	}
+}

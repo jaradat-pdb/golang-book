@@ -8,4 +8,10 @@ func Main() {
 	}
 	var input string
 	fmt.Scanln(&input)
+
+	var c chan string = make(chan string)
+	go Pinger(c)
+	go Ponger(c)
+	go Printer(c)
+	fmt.Scanln(&input)
 }
